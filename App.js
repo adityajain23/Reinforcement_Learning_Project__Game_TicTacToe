@@ -1,21 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  Button,
+} from "react-native";
+import * as Font from "expo-font";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount() {
+    Font.loadAsync({
+      Aloja: require("./app/assets/fonts/Aloja-Light.otf"),
+      BungeeInline: require("./app/assets/fonts/BungeeInline-Regular.ttf"),
+      StyleScript: require("./app/assets/fonts/StyleScript-Regular.ttf"),
+      PaletteMosaic: require("./app/assets/fonts/PaletteMosaic-Regular.ttf"),
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.screen}>
+        <Text style={styles.title}>TicTacToe</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, //notch-related problem.
+    transform: [{ rotate: "-20deg" }],
+  },
+  title: {
+    fontSize: 66,
+    fontFamily: "StyleScript",
   },
 });
+
+export default App;
