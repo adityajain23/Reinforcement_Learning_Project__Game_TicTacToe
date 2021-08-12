@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import * as Font from "expo-font";
 
+import WinnerScreen from "./app/screens/WinnerScreen";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.screen}>
-        <Text style={styles.title}>TicTacToe</Text>
+        <Text>Hello sir!!</Text>
       </View>
     );
   }
@@ -39,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, //notch-related problem.
-    transform: [{ rotate: "-20deg" }],
+    // transform: [{ rotate: "-20deg" }],
   },
   title: {
     fontSize: 66,
