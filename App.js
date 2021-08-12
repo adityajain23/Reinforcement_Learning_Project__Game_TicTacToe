@@ -30,8 +30,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.screen}>
-        {/* <Text>Hello sir!!</Text> */}
-        <HomeScreen />
+        <Text style={styles.title}>Hello sir!!</Text>
       </View>
     );
   }
@@ -40,10 +39,10 @@ class App extends Component {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
+    justifyContent: "center",
+    alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, //notch-related problem.
-    // transform: [{ rotate: "-20deg" }],
+    transform: [{ rotate: "-20deg" }],
   },
   title: {
     fontSize: 66,
