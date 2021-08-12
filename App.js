@@ -10,6 +10,7 @@ import {
 import * as Font from "expo-font";
 
 import WinnerScreen from "./app/screens/WinnerScreen";
+import HomeScreen from "./app/screens/HomeScreen";
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +30,8 @@ class App extends Component {
   render() {
     return (
       <View style={styles.screen}>
-        <Text>Hello sir!!</Text>
+        {/* <Text>Hello sir!!</Text> */}
+        <HomeScreen />
       </View>
     );
   }
@@ -38,8 +40,8 @@ class App extends Component {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, //notch-related problem.
     // transform: [{ rotate: "-20deg" }],
   },

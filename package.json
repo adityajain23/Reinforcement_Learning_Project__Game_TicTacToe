@@ -12,6 +12,8 @@
     "@react-native-community/hooks": "^2.6.0",
     "expo": "~42.0.1",
     "expo-cli": "^4.9.1",
+    "expo-font": "~9.2.1",
+    "expo-linear-gradient": "^9.2.0",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -20,8 +22,7 @@
     "react-native-prompt-android": "^1.1.0",
     "react-native-prompt-crossplatform": "^1.6.1",
     "react-native-safe-area-context": "3.2.0",
-    "react-native-web": "~0.13.12",
-    "expo-font": "~9.2.1"
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
