@@ -6,23 +6,30 @@ import {
   Button,
   Image,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 
 class GameScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
-      <View>
-        <Text> GameScreen </Text>
+      <View style={styles.screen}>
+        <Button
+          title="Game Ends"
+          onPress={() => {
+            this.props.navigation.navigate("Winner");
+          }}
+        />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default GameScreen;

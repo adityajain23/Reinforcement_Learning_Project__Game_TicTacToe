@@ -11,6 +11,8 @@ import * as Font from "expo-font";
 
 import HomeScreen from "./app/screens/HomeScreen";
 import WinnerScreen from "./app/screens/WinnerScreen";
+import MainScreen from "./app/screens/MainScreen";
+import GameScreen from "./app/screens/GameScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -39,6 +41,8 @@ class App extends Component {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Winner" component={WinnerScreen} />
+            <Stack.Screen name="MainPage" component={MainScreen} />
+            <Stack.Screen name="Game" component={GameScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       );

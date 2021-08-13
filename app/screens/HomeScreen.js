@@ -39,12 +39,17 @@ class HomeScreen extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate("Winner");
+              this.props.navigation.navigate("MainPage");
             }}
           >
             <Text style={styles.text}>{"Single Player"}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => {}}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.props.navigation.navigate("MainPage");
+            }}
+          >
             <Text style={styles.text}>{"Multi Player"}</Text>
           </TouchableOpacity>
         </View>
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
   button: {
     width: 140,
     height: 40,
-    borderRadius: 60,
+    borderRadius: 30,
     backgroundColor: "#107615",
     alignItems: "center",
     justifyContent: "center",
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     height: 60,
   },
   text: {
-    fontSize: 14,
+    fontSize: 10,
     fontFamily: "Aloja",
     letterSpacing: 0.25,
     color: "white",

@@ -67,14 +67,14 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    fontSize: 24,
-    fontFamily: "Aloja",
+    fontSize: 20,
+    fontFamily: "BungeeInline",
     textAlign: "center",
   },
   title: {
     flex: 1,
     fontFamily: "Aloja",
-    fontSize: 40,
+    fontSize: 35,
     textAlign: "center",
   },
   trophy: {
