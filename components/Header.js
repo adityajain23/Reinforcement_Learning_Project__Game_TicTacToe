@@ -12,9 +12,9 @@ class Header extends Component {
     return (
       <View style={styles.header}>
         <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          colors={["rgba(0,0,0,1)", "rgba(17,121,9,1)", "rgba(0, 255, 153, 1)"]}
+          // start={{ x: 0, y: 0 }}
+          // end={{ x: 1, y: 0 }}
+          colors={["rgba(0,0,0,1)", "rgba(17,121,9,1)", "#44a049"]}
         >
           <View style={styles.headerContainer}>
             <Image
