@@ -1,20 +1,30 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  Pressable,
+} from "react-native";
+
+import upperWave from "../assets/upperWave.png";
+import lowerWave from "../assets/lowerWave.png";
 
 class WinnerScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
-      <View style={styles.screen}>
-        <Image
+      <Pressable
+        onPress={() => {
+          this.props.navigation.navigate("Home");
+        }}
+        style={styles.screen}
+      >
+        <ImageBackground
+          source={upperWave}
+          style={styles.upperWave}
           resizeMode="cover"
-          style={styles.waves}
-          source={require("../assets/upperWave.svg")}
-        />
+        ></ImageBackground>
         <View style={styles.container}>
           <Text style={styles.title}>Player 1 Wins</Text>
           <Image
@@ -29,15 +39,31 @@ class WinnerScreen extends Component {
           style={styles.waves}
           source={require("../assets/lowerWave.svg")}
         />
-      </View>
+        <ImageBackground
+          source={lowerWave}
+          style={styles.lowerWave}
+          resizeMode="cover"
+        ></ImageBackground>
+      </Pressable>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
+    flex: 7,
     justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  upperWave: {
+    width: "100%",
+    height: 100,
+    zIndex: 2,
+  },
+  lowerWave: {
+    width: "100%",
+    height: 100,
   },
   text: {
     flex: 1,
@@ -56,6 +82,7 @@ const styles = StyleSheet.create({
   },
   screen: {
     flex: 1,
+    backgroundColor: "white",
   },
   waves: {
     flex: 1,

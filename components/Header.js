@@ -15,6 +15,7 @@ class Header extends Component {
           // start={{ x: 0, y: 0 }}
           // end={{ x: 1, y: 0 }}
           colors={["rgba(0,0,0,1)", "rgba(17,121,9,1)", "#44a049"]}
+          style={styles.headerGrad}
         >
           <View style={styles.headerContainer}>
             <Image
@@ -31,6 +32,9 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
   header: {
+    flex: 1,
+  },
+  headerGrad: {
     flex: 1,
   },
   headerContainer: {

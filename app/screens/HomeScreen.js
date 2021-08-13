@@ -7,16 +7,15 @@ import {
   ImageBackground,
   Pressable,
   Button,
+  TouchableOpacity,
 } from "react-native";
 
 import Header from "../../components/Header";
+import boardImg from "../assets/ticTacToeBoard.jpg";
+import upperWave from "../assets/upperWave.png";
+import lowerWave from "../assets/lowerWave.png";
 
 class HomeScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
       <View style={styles.screen}>
@@ -24,36 +23,36 @@ class HomeScreen extends Component {
           <Header />
         </View>
         <ImageBackground
+          source={upperWave}
+          style={styles.upperWave}
           resizeMode="cover"
-          style={[
-            styles.wave,
-            { justifyContent: "flex-end", paddingBottom: 20 },
-          ]}
-          source={require("../assets/upperWave.svg")}
         >
           <Text style={styles.title}>TicTacToe</Text>
         </ImageBackground>
-        <View style={styles.boardImageContainer}>
-          <Image
-            resizeMode="center"
-            style={styles.boardImage}
-            source={require("../assets/ticTacToeBoard.jpg")}
-          />
+        <View style={styles.imgHolder}>
+          <ImageBackground
+            source={boardImg}
+            style={styles.boardImg}
+          ></ImageBackground>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.props.navigation.navigate("Winner");
+            }}
+          >
+            <Text style={styles.text}>{"Single Player"}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <Text style={styles.text}>{"Multi Player"}</Text>
+          </TouchableOpacity>
         </View>
         <ImageBackground
+          source={lowerWave}
+          style={styles.lowerWave}
           resizeMode="cover"
-          style={[styles.wave, { justifyContent: "flex-start" }]}
-          source={require("../assets/lowerWave.svg")}
-        >
-          <View style={styles.buttonContainer}>
-            <Pressable style={styles.button} onPress={() => {}}>
-              <Text style={styles.text}>{"Single Player"}</Text>
-            </Pressable>
-            <Pressable style={styles.button} onPress={() => {}}>
-              <Text style={styles.text}>{"Multi Player"}</Text>
-            </Pressable>
-          </View>
-        </ImageBackground>
+        ></ImageBackground>
       </View>
     );
   }
@@ -63,8 +62,23 @@ const styles = StyleSheet.create({
   boardImage: {
     flex: 1,
   },
-  boardImageContainer: {
-    flex: 8,
+  imgHolder: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  upperWave: {
+    width: "100%",
+    height: 100,
+    zIndex: 2,
+  },
+  lowerWave: {
+    width: "100%",
+    height: 100,
+  },
+  boardImg: {
+    width: 400,
+    height: 400,
   },
   button: {
     width: 140,
@@ -76,6 +90,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   buttonContainer: {
+    flex: 0.2,
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -85,7 +100,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    fontWeight: "bold",
     fontFamily: "Aloja",
     letterSpacing: 0.25,
     color: "white",
@@ -96,12 +110,12 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "-20deg" }],
     textAlign: "center",
     fontFamily: "Aloja",
+    paddingTop: 35,
+    zIndex: 10,
   },
   screen: {
     flex: 1,
-  },
-  wave: {
-    flex: 3,
+    backgroundColor: "white",
   },
 });
 

@@ -10,6 +10,8 @@
   "dependencies": {
     "@expo/ngrok": "^2.4.3",
     "@react-native-community/hooks": "^2.6.0",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/native-stack": "^6.0.5",
     "expo": "~42.0.1",
     "expo-cli": "^4.9.1",
     "expo-font": "~9.2.1",

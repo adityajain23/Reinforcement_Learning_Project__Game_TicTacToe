@@ -9,13 +9,17 @@ import {
 } from "react-native";
 import * as Font from "expo-font";
 
-import WinnerScreen from "./app/screens/WinnerScreen";
 import HomeScreen from "./app/screens/HomeScreen";
+import WinnerScreen from "./app/screens/WinnerScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+
+const Stack = createNativeStackNavigator();
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { isLoaded: false };
   }
 
   componentDidMount() {
@@ -24,15 +28,27 @@ class App extends Component {
       BungeeInline: require("./app/assets/fonts/BungeeInline-Regular.ttf"),
       StyleScript: require("./app/assets/fonts/StyleScript-Regular.ttf"),
       PaletteMosaic: require("./app/assets/fonts/PaletteMosaic-Regular.ttf"),
-    });
+    }).then(() => this.setState({ isLoaded: true }));
+    StatusBar.setHidden(true);
   }
 
   render() {
-    return (
-      <View style={styles.screen}>
-        <WinnerScreen />
-      </View>
-    );
+    if (this.state.isLoaded) {
+      return (
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Winner" component={WinnerScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    } else {
+      return (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      );
+    }
   }
 }
 
