@@ -26,7 +26,9 @@ class WinnerScreen extends Component {
           resizeMode="cover"
         ></ImageBackground>
         <View style={styles.container}>
-          <Text style={styles.title}>Player 1 Wins</Text>
+          <Text style={styles.title}>
+            {this.props.route.params.winnerName} Wins
+          </Text>
           <Image
             resizeMode="center"
             style={styles.trophy}
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     fontSize: 20,
-    fontFamily: "BungeeInline",
+    fontFamily: "Aloja",
     textAlign: "center",
   },
   title: {

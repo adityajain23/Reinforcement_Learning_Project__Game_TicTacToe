@@ -39,7 +39,7 @@ class HomeScreen extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate("MainPage");
+              this.props.navigation.navigate("MainPage", { isMulti: false });
             }}
           >
             <Text style={styles.text}>{"Single Player"}</Text>
@@ -47,7 +47,7 @@ class HomeScreen extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate("MainPage");
+              this.props.navigation.navigate("MainPage", { isMulti: true });
             }}
           >
             <Text style={styles.text}>{"Multi Player"}</Text>

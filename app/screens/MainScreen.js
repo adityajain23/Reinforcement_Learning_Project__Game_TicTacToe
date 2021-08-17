@@ -14,6 +14,25 @@ import {
 import Header from "../../components/Header";
 import boardImg from "../assets/ticTacToeBoard.jpg";
 class MainScreen extends Component {
+  state = {
+    player1_name: "",
+    player2_name: "",
+  };
+
+  componentDidMount = () => {
+    if (!this.props.route.params.isMulti) {
+      this.setPlayer2Name("Bot");
+    }
+  };
+
+  setPlayer1Name = (name) => {
+    this.setState({ player1_name: name });
+  };
+
+  setPlayer2Name = (name) => {
+    this.setState({ player2_name: name });
+  };
+
   render() {
     return (
       <View style={styles.screen}>
@@ -22,14 +41,53 @@ class MainScreen extends Component {
         </View>
         <Text style={styles.title}>Tic Tac Toe</Text>
         <View style={styles.playerNamesContainer}>
-          <View style={styles.nameContainer}>
-            <Text style={styles.text}>Player 1</Text>
-            <TextInput placeholder="name" style={styles.textInput} />
-          </View>
-          <View style={styles.nameContainer}>
-            <Text style={styles.text}>Player 2</Text>
-            <TextInput placeholder="name" style={styles.textInput} />
-          </View>
+          {this.props.route.params.isMulti ? (
+            <View style={styles.playerNamesContainer}>
+              <View style={styles.nameContainer}>
+                <Text style={styles.text}>Player 1</Text>
+                <TextInput
+                  placeholder="name"
+                  defaultValue="Player 1"
+                  style={styles.textInput}
+                  value={this.state.player1_name}
+                  onChangeText={this.setPlayer1Name}
+                />
+              </View>
+              <View style={styles.nameContainer}>
+                <Text style={styles.text}>Player 2</Text>
+                <TextInput
+                  placeholder="name"
+                  defaultValue="Player 2"
+                  style={styles.textInput}
+                  value={this.state.player2_name}
+                  onChangeText={this.setPlayer2Name}
+                />
+              </View>
+            </View>
+          ) : (
+            <View style={styles.playerNamesContainer}>
+              <View style={styles.nameContainer}>
+                <Text style={styles.text}>Player</Text>
+                <TextInput
+                  placeholder="name"
+                  defaultValue="Player"
+                  style={styles.textInput}
+                  value={this.state.player1_name}
+                  onChangeText={this.setPlayer1Name}
+                />
+              </View>
+              <View style={styles.nameContainer}>
+                <Text style={styles.text}>Computer</Text>
+                <TextInput
+                  placeholder="Bot"
+                  style={styles.textInput}
+                  value={this.state.player2_name}
+                  defaultValue="Bot"
+                  onChangeText={this.setPlayer2Name}
+                />
+              </View>
+            </View>
+          )}
         </View>
         <ImageBackground
           style={styles.boardImg}
@@ -48,7 +106,10 @@ class MainScreen extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate("Game");
+              this.props.navigation.navigate("Game", {
+                player1_name: this.state.player1_name,
+                player2_name: this.state.player2_name,
+              });
             }}
           >
             <Text style={styles.text}>{"Start"}</Text>
@@ -95,11 +156,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   text: {
-    fontFamily: "BungeeInline",
+    fontFamily: "Aloja",
     fontSize: 14,
     textAlign: "center",
   },
   textInput: {
+    fontFamily: "Aloja",
     borderWidth: 2,
     borderColor: "green",
     borderLeftWidth: 15,
