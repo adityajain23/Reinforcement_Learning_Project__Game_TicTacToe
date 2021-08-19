@@ -26,6 +26,8 @@ class GameScreen extends Component {
     });
   };
 
+  // This function when called manually resets the board and
+  // if called from the playerPlayed function then it updates the table (wins, losses, or draws).
   newGame = () => {
     console.log(this.state.isMulti ? "hello" : "bye");
     // Logic to check which player wins
@@ -35,6 +37,7 @@ class GameScreen extends Component {
     });
   };
 
+  // Resets all the states.
   reset = () => {
     this.setState({
       player1_wins: 0,
@@ -46,6 +49,7 @@ class GameScreen extends Component {
     });
   };
 
+  // updates board if button (0-8) is clicked.
   playerPlayed = (key) => {
     if (this.state.currentBoard[key] == "-") {
       this.state.currentBoard[key] = this.state.currentPlayer ? "O" : "X";
@@ -56,6 +60,7 @@ class GameScreen extends Component {
     }
   };
 
+  // change Curr Player after he has played.
   changePlayer = () => {
     this.setState({
       currentPlayer: this.state.currentPlayer ? 0 : 1,
