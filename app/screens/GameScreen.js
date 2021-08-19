@@ -9,8 +9,9 @@ class GameScreen extends Component {
   state = {
     player1_name: "",
     player2_name: "",
-    player1_wins: 2,
-    player1_losses: 3,
+    isMulti: false,
+    player1_wins: 0,
+    player1_losses: 0,
     player1_draws: 0,
     currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
     currentPlayer: 0,
@@ -21,6 +22,27 @@ class GameScreen extends Component {
     this.setState({
       player1_name: this.props.route.params.player1_name,
       player2_name: this.props.route.params.player2_name,
+      isMulti: this.props.route.params.isMulti,
+    });
+  };
+
+  newGame = () => {
+    console.log(this.state.isMulti ? "hello" : "bye");
+    // Logic to check which player wins
+    this.state.player1_wins++;
+    this.setState({
+      currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+    });
+  };
+
+  reset = () => {
+    this.setState({
+      player1_wins: 0,
+      player1_losses: 0,
+      player1_draws: 0,
+      currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+      currentPlayer: 0,
+      colorList: ["#48cd49", "#107615", "#062b07"],
     });
   };
 
@@ -86,6 +108,10 @@ class GameScreen extends Component {
             <GameScreenButtons
               player1_name={this.state.player1_name}
               player2_name={this.state.player2_name}
+              player1_wins={this.state.player1_wins}
+              player1_losses={this.state.player1_losses}
+              newGame={this.newGame}
+              reset={this.reset}
               navigation={this.props.navigation}
             />
           </View>

@@ -7,10 +7,10 @@ class GameScreenButtons extends Component {
       <View style={{ flex: 1 }}>
         {/* Container for "New Game" and "Reset" Button */}
         <View style={styles.buttonView}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.props.newGame}>
             <Text style={styles.text}>{"New Game"}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.props.reset}>
             <Text style={styles.text}>{"Reset"}</Text>
           </TouchableOpacity>
         </View>
@@ -26,7 +26,12 @@ class GameScreenButtons extends Component {
             style={[styles.button, { backgroundColor: "black" }]}
             onPress={() =>
               this.props.navigation.navigate("Winner", {
-                winnerName: this.props.player1_name,
+                winnerName:
+                  this.props.player1_wins == this.props.player1_losses
+                    ? "No One"
+                    : this.props.player1_wins > this.props.player1_losses
+                    ? this.props.player1_name
+                    : this.props.player2_name,
               })
             }
           >

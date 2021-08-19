@@ -109,6 +109,7 @@ class MainScreen extends Component {
               this.props.navigation.navigate("Game", {
                 player1_name: this.state.player1_name,
                 player2_name: this.state.player2_name,
+                isMulti: this.props.route.params.isMulti,
               });
             }}
           >
