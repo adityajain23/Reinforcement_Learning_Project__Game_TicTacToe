@@ -29,9 +29,6 @@ class GameScreen extends Component {
   // This function when called manually resets the board and
   // if called from the playerPlayed function then it updates the table (wins, losses, or draws).
   newGame = () => {
-    console.log(this.state.isMulti ? "hello" : "bye");
-    // Logic to check which player wins
-    this.state.player1_wins++;
     this.setState({
       currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
     });
@@ -50,21 +47,167 @@ class GameScreen extends Component {
   };
 
   // updates board if button (0-8) is clicked.
-  playerPlayed = (key) => {
+  playerPlayed = async (key) => {
     if (this.state.currentBoard[key] == "-") {
+      // TODO: Check later if symbol same
       this.state.currentBoard[key] = this.state.currentPlayer ? "O" : "X";
-      this.changePlayer();
+
       this.setState({
         currentBoard: this.state.currentBoard,
       });
+
+      let winner = this.checkWin(key);
+
+      if (winner === 1) {
+        // TODO: End game with winner
+
+        await new Promise((r) => setTimeout(r, 500));
+
+        alert(
+          this.state.currentPlayer
+            ? this.state.player2_name + " Wins"
+            : this.state.player1_name + " Wins"
+        );
+
+        let winner_player1 = !this.state.currentPlayer;
+
+        this.setState(
+          {
+            player1_wins: this.state.player1_wins + winner_player1,
+            player1_losses: this.state.player1_losses + !winner_player1,
+          },
+          () => {
+            this.setState({
+              currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            });
+          }
+        );
+      } else if (winner === -1) {
+        await new Promise((r) => setTimeout(r, 500));
+
+        alert("Draw");
+
+        this.setState(
+          {
+            player1_draws: this.state.player1_draws + 1,
+          },
+          () => {
+            this.setState({
+              currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+            });
+          }
+        );
+      }
+
+      this.changePlayer();
+
+      console.log(
+        this.state.currentPlayer,
+        this.state.isMulti,
+        this.state.currentPlayer === 1
+      );
+
+      if (this.state.currentPlayer === 1 && !this.state.isMulti) {
+        console.log("Calling bot");
+        this.playBot();
+      }
+    } else {
+      alert("Please select valid box");
     }
+  };
+
+  playBot = async () => {
+    let avaPos = [];
+
+    for (let index = 0; index < this.state.currentBoard.length; index++) {
+      if (this.state.currentBoard[index] === "-") {
+        avaPos.push(index);
+      }
+    }
+
+    await new Promise((r) => setTimeout(r, 500));
+
+    if (avaPos.length !== 0) {
+      let key = avaPos[Math.floor(Math.random() * avaPos.length)];
+      this.playerPlayed(key);
+    }
+  };
+
+  checkWin = (action) => {
+    let matrix = [
+      [
+        [1, 2],
+        [3, 6],
+        [4, 8],
+      ],
+      [
+        [0, 2],
+        [4, 7],
+      ],
+      [
+        [0, 1],
+        [5, 8],
+        [4, 6],
+      ],
+      [
+        [0, 6],
+        [4, 5],
+      ],
+      [
+        [3, 5],
+        [1, 7],
+        [0, 8],
+        [2, 6],
+      ],
+      [
+        [3, 4],
+        [2, 8],
+      ],
+      [
+        [0, 3],
+        [7, 8],
+        [2, 4],
+      ],
+      [
+        [6, 8],
+        [1, 4],
+      ],
+      [
+        [6, 7],
+        [2, 5],
+        [0, 4],
+      ],
+    ];
+
+    let checkConditons = matrix[action];
+
+    for (let i = 0; i < checkConditons.length; i++) {
+      let first = checkConditons[i][0];
+      let second = checkConditons[i][1];
+
+      if (
+        this.state.currentBoard[first] === this.state.currentBoard[action] &&
+        this.state.currentBoard[second] === this.state.currentBoard[action]
+      ) {
+        return 1;
+      }
+    }
+
+    for (let i = 0; i < this.state.currentBoard.length; i++) {
+      if (this.state.currentBoard[i] === "-") {
+        return 0;
+      }
+    }
+    return -1;
   };
 
   // change Curr Player after he has played.
   changePlayer = () => {
-    this.setState({
-      currentPlayer: this.state.currentPlayer ? 0 : 1,
-    });
+    // this.setState({
+    //   currentPlayer: this.state.currentPlayer ? 0 : 1,
+    // });
+
+    this.state.currentPlayer = this.state.currentPlayer ? 0 : 1;
     this.state.colorList.reverse();
   };
 
@@ -84,6 +227,7 @@ class GameScreen extends Component {
           </View>
 
           {/* Symbols */}
+          {/* Todo: Give random initial symbol and random current player  */}
           <View style={styles.symbolView}>
             <Text style={styles.nameText}>X</Text>
             <Text style={styles.nameText}>O</Text>
