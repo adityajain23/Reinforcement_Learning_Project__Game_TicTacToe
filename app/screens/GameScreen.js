@@ -52,7 +52,7 @@ class GameScreen extends Component {
       // TODO: Check later if symbol same
       this.state.currentBoard[key] = this.state.currentPlayer ? "O" : "X";
 
-      this.setState({
+      await this.setState({
         currentBoard: this.state.currentBoard,
       });
 
@@ -60,7 +60,6 @@ class GameScreen extends Component {
 
       if (winner === 1) {
         // TODO: End game with winner
-
         await new Promise((r) => setTimeout(r, 500));
 
         alert(
@@ -71,44 +70,25 @@ class GameScreen extends Component {
 
         let winner_player1 = !this.state.currentPlayer;
 
-        this.setState(
-          {
-            player1_wins: this.state.player1_wins + winner_player1,
-            player1_losses: this.state.player1_losses + !winner_player1,
-          },
-          () => {
-            this.setState({
-              currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            });
-          }
-        );
+        await this.setState({
+          player1_wins: this.state.player1_wins + winner_player1,
+          player1_losses: this.state.player1_losses + !winner_player1,
+          currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+        });
       } else if (winner === -1) {
         await new Promise((r) => setTimeout(r, 500));
 
         alert("Draw");
 
-        this.setState(
-          {
-            player1_draws: this.state.player1_draws + 1,
-          },
-          () => {
-            this.setState({
-              currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
-            });
-          }
-        );
+        await this.setState({
+          player1_draws: this.state.player1_draws + 1,
+          currentBoard: ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
+        });
       }
 
-      this.changePlayer();
-
-      console.log(
-        this.state.currentPlayer,
-        this.state.isMulti,
-        this.state.currentPlayer === 1
-      );
+      await this.changePlayer();
 
       if (this.state.currentPlayer === 1 && !this.state.isMulti) {
-        console.log("Calling bot");
         this.playBot();
       }
     } else {
@@ -125,7 +105,7 @@ class GameScreen extends Component {
       }
     }
 
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 200));
 
     if (avaPos.length !== 0) {
       let key = avaPos[Math.floor(Math.random() * avaPos.length)];
@@ -134,7 +114,7 @@ class GameScreen extends Component {
   };
 
   checkWin = (action) => {
-    let matrix = [
+    const matrix = [
       [
         [1, 2],
         [3, 6],
@@ -203,12 +183,10 @@ class GameScreen extends Component {
 
   // change Curr Player after he has played.
   changePlayer = () => {
-    // this.setState({
-    //   currentPlayer: this.state.currentPlayer ? 0 : 1,
-    // });
-
-    this.state.currentPlayer = this.state.currentPlayer ? 0 : 1;
-    this.state.colorList.reverse();
+    this.setState({
+      currentPlayer: this.state.currentPlayer ? 0 : 1,
+      colorList: this.state.colorList.reverse(),
+    });
   };
 
   render() {
