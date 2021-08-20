@@ -4,6 +4,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Board from "../../components/Board";
 import GameScreenButtons from "../../components/GameScreenButtons";
 import Table from "../../components/Table";
+//Player1_bot_data for "O".
+import player1_bot_data from "../assets/stateActionValues/player1.json";
+//Player2_bot_data for "X".
+// import player2_bot_data from "../assets/stateActionValues/player2.json";
 
 class GameScreen extends Component {
   state = {
@@ -108,7 +112,14 @@ class GameScreen extends Component {
     await new Promise((r) => setTimeout(r, 200));
 
     if (avaPos.length !== 0) {
-      let key = avaPos[Math.floor(Math.random() * avaPos.length)];
+      var currBoard = this.state.currentBoard.join("").split("-").join(" ");
+      var obj = player1_bot_data[currBoard];
+      const getMax = (object) => {
+        return Object.keys(object).filter((x) => {
+          return object[x] == Math.max.apply(null, Object.values(object));
+        });
+      };
+      let key = parseInt(getMax(obj));
       this.playerPlayed(key);
     }
   };
